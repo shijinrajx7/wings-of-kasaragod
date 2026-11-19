@@ -206,3 +206,15 @@ body[data-theme] .site-header.is-scrolled .primary-nav a,body[data-theme] .site-
 body[data-theme] .button-outline,body[data-theme] .gallery-filter,body[data-theme] .tool-button{border-color:var(--line)}
 body[data-theme] .music-dock{background:linear-gradient(135deg,var(--midnight),var(--forest-deep))!important;border-color:var(--gold)!important}
 @media(max-width:700px){body[data-device="phone"] .opening{width:100vw!important;min-height:100svh}body[data-device="phone"] .opening-copy{margin-inline:20px;width:calc(100% - 40px)}body[data-device="phone"] .opening h1{font-size:clamp(2.8rem,13vw,5rem);overflow-wrap:anywhere}}
+
+/* Accessible theme control: visible in both header states and every palette. */
+#themeCycle.theme-switch{background:#102d25!important;color:#fff!important;border:2px solid #f2c875!important;box-shadow:0 2px 12px rgba(0,0,0,.38)!important;opacity:1!important}
+#themeCycle.theme-switch>span:first-child{color:#fff!important;text-shadow:0 1px 3px #000;font-size:1.65rem}
+#themeCycle.theme-switch:hover,#themeCycle.theme-switch:focus-visible{background:#f2c875!important;color:#14251f!important;border-color:#14251f!important;outline:3px solid #fff!important;outline-offset:3px}
+#themeCycle.theme-switch:hover>span:first-child,#themeCycle.theme-switch:focus-visible>span:first-child{color:#14251f!important;text-shadow:none}
+#themeCycle.theme-switch:focus-visible{outline-offset:4px}
+.device-dialog{z-index:99999;max-width:min(760px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto}
+.device-dialog::backdrop{background:rgba(4,15,13,.78);backdrop-filter:blur(5px)}
+.device-setup-card{max-height:none}
+.device-options button{cursor:pointer}
+.device-options button:focus-visible{outline:3px solid #e2b36d;outline-offset:3px}
