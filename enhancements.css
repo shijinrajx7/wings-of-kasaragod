@@ -133,3 +133,34 @@ body[data-theme] .tool-button:hover,body[data-theme] .gallery-filter[aria-presse
 #customMusicPanel[hidden],#websiteMusicPanel[hidden]{display:none}
 .music-dock audio{margin-top:.65rem}
 @media(max-width:600px){.device-options button img{height:86px}.device-setup-card{padding:1rem}.music-mode-tabs button{font-size:.52rem}}
+
+/* 2026-11 viewport and contrast correction: device choice changes layout, never the page canvas width. */
+html,body{width:100%;max-width:none;min-width:0;overflow-x:clip}
+body[data-device="phone"],body[data-device="tablet"],body[data-device="laptop"]{width:100%;max-width:none;min-height:100vh;margin:0;border:0;box-shadow:none}
+main,.opening,.hero,.section,.site-header{width:100%;max-width:none}
+.opening{min-height:100svh;min-height:100dvh;padding-top:clamp(76px,8vh,104px);padding-bottom:clamp(46px,7vh,76px)}
+.opening-image{object-fit:cover;object-position:center center}
+.opening-shade{background:linear-gradient(90deg,rgba(3,16,13,.88) 0%,rgba(3,16,13,.68) 34%,rgba(3,16,13,.38) 68%,rgba(3,16,13,.18) 100%),linear-gradient(0deg,rgba(3,16,13,.78) 0%,rgba(3,16,13,.12) 52%,rgba(3,16,13,.42) 100%)}
+.opening-copy{width:min( min(880px,calc(100% - 48px)), 58vw);margin:clamp(5rem,10vh,7rem) auto 4.5rem clamp(28px,8vw,150px);text-shadow:0 2px 18px rgba(0,0,0,.46)}
+.opening .eyebrow-light{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.opening h1{font-size:clamp(3.5rem,9.2vw,9rem);text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.opening-tagline{color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.8);font-weight:500}
+.opening-secondary{color:#fff;border-color:rgba(255,255,255,.68);text-shadow:0 1px 8px rgba(0,0,0,.9);background:linear-gradient(90deg,rgba(3,16,13,.3),transparent);padding:.9rem .5rem .2rem 0}
+.opening-place,.scroll-cue{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.9)}
+.opening .text-link-light{color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.95)}
+.site-header:not(.is-scrolled){background:linear-gradient(180deg,rgba(3,16,13,.82),rgba(3,16,13,.48));color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+.site-header:not(.is-scrolled) .primary-nav a,.site-header:not(.is-scrolled) .brand,.site-header:not(.is-scrolled) .header-tools button{color:#fff}
+body[data-device="laptop"] .opening-copy{margin-left:clamp(32px,8vw,150px);width:min(880px,60vw)}
+body[data-device="tablet"] .opening-copy{width:min(760px,calc(100% - 64px));margin-left:clamp(28px,7vw,72px)}
+body[data-device="phone"] .opening{min-height:100svh;padding-top:130px;padding-bottom:110px}
+body[data-device="phone"] .opening-copy{width:calc(100% - 40px);margin:1.5rem 20px 3.5rem}
+body[data-device="phone"] .opening h1{font-size:clamp(3rem,15vw,5.2rem);line-height:.88;overflow-wrap:anywhere}
+body[data-device="phone"] .opening-tagline{font-size:1rem}
+body[data-device="phone"] .opening-secondary{font-size:.68rem;margin-top:1.4rem}
+body[data-device="phone"] .opening-place{right:16px;bottom:22px;font-size:.48rem}
+body[data-device="phone"] .scroll-cue{left:16px;bottom:22px;font-size:.48rem}
+body[data-device="tablet"] .opening h1{font-size:clamp(4rem,9vw,7rem)}
+body[data-device="tablet"] .opening-copy{margin-top:3.5rem;margin-bottom:4rem}
+@media(max-width:1100px){.opening-copy{width:min(760px,calc(100% - 56px));margin-left:clamp(28px,6vw,72px)}}
+@media(max-height:720px) and (min-width:701px){.opening{min-height:100svh;padding-top:76px;padding-bottom:30px}.opening-copy{margin-top:1rem;margin-bottom:2.8rem}.opening h1{font-size:clamp(3.4rem,7.6vw,7.2rem)}.opening-secondary{margin-top:1.2rem}.opening-place,.scroll-cue{bottom:16px}}
+@media(max-width:700px){.opening-copy{width:calc(100% - 40px);margin:1.2rem 20px 3.5rem}.opening h1{font-size:clamp(3rem,14vw,5.3rem)}.opening-shade{background:linear-gradient(90deg,rgba(3,16,13,.78),rgba(3,16,13,.35)),linear-gradient(0deg,rgba(3,16,13,.76),rgba(3,16,13,.18))}}
