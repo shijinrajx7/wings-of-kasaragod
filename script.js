@@ -370,25 +370,21 @@
   };
 
   const initSound = () => {
-    const toggle=$('#soundToggle'); let context=null; let nodes=[]; let noiseSource=null;
-    const stop = () => {nodes.forEach(node=>{try{node.stop?.();}catch{}});nodes=[];if(noiseSource){try{noiseSource.stop();}catch{}noiseSource=null;} if(context){context.close().catch(()=>{});context=null;}};
-    toggle.addEventListener('click', async () => {
-      const on=toggle.getAttribute('aria-pressed')!=='true';
-      if(!on){stop();toggle.setAttribute('aria-pressed','false');toggle.setAttribute('aria-label','Turn ambient sound on');$('#soundLabel').textContent='SOUND OFF';return;}
-      const AudioContext=window.AudioContext||window.webkitAudioContext;
-      if(!AudioContext){$('#soundLabel').textContent='AUDIO UNAVAILABLE';return;}
-      try{
-        context=new AudioContext(); await context.resume();
-        const master=context.createGain(); master.gain.value=0.018; master.connect(context.destination);
-        const filter=context.createBiquadFilter(); filter.type='lowpass'; filter.frequency.value=420; filter.connect(master);
-        const buffer=context.createBuffer(1,context.sampleRate*2,context.sampleRate); const data=buffer.getChannelData(0);
-        for(let i=0;i<data.length;i++) data[i]=(Math.random()*2-1)*0.28;
-        noiseSource=context.createBufferSource(); noiseSource.buffer=buffer; noiseSource.loop=true; noiseSource.connect(filter); noiseSource.start(); nodes.push(noiseSource);
-        [110,164.81,220].forEach((frequency,index)=>{const oscillator=context.createOscillator();const gain=context.createGain();oscillator.type='sine';oscillator.frequency.value=frequency;gain.gain.value=index===0?.12:.045;oscillator.connect(gain);gain.connect(master);oscillator.start();nodes.push(oscillator);});
-        toggle.setAttribute('aria-pressed','true');toggle.setAttribute('aria-label','Turn ambient sound off');$('#soundLabel').textContent='SOUND ON';
-      }catch{stop();toggle.setAttribute('aria-pressed','false');$('#soundLabel').textContent='AUDIO UNAVAILABLE';}
+    const toggle=$('#soundToggle'), audio=$('#fieldMusicAudio');
+    if(!toggle||!audio) return;
+    const sync=()=>{
+      const playing=!audio.paused;
+      toggle.setAttribute('aria-pressed',String(playing));
+      toggle.setAttribute('aria-label',playing?'Pause music':'Play selected music');
+      $('#soundLabel').textContent=playing?'MUSIC ON':'MUSIC PLAY';
+    };
+    toggle.addEventListener('click',async()=>{
+      if(!audio.src){$('#musicFiles')?.click();$('#liveMessage').textContent='Add a song to start your soundtrack.';return;}
+      try{if(audio.paused) await audio.play();else audio.pause();}catch{$('#liveMessage').textContent='This audio file could not be played in this browser.';}
+      sync();
     });
-    window.addEventListener('pagehide',stop,{once:true});
+    ['play','pause','ended','error'].forEach(name=>audio.addEventListener(name,sync));
+    window.addEventListener('pagehide',()=>audio.pause(),{once:true});
   };
 
   const setupNavigation = () => {
