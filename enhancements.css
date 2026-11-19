@@ -102,3 +102,34 @@ body[data-device="phone"] .site-header{left:50%;right:auto;width:min(430px,100vw
 body[data-device="tablet"] .site-header{left:50%;right:auto;width:min(900px,100vw);transform:translateX(-50%)}
 body[data-device="phone"] .music-dock{left:50%;transform:translateX(-50%);width:min(414px,calc(100vw - 16px))}
 body[data-device="tablet"] .music-dock{left:max(12px,calc(50% - 438px))}
+
+/* Full-theme art direction: colour, surfaces, borders, imagery and controls follow the chosen atmosphere. */
+body[data-theme="forest"]{--theme-glow:rgba(72,125,84,.22)}
+body[data-theme="ocean"]{--theme-glow:rgba(54,143,177,.25)}
+body[data-theme="sunset"]{--theme-glow:rgba(209,119,74,.22)}
+body[data-theme="night"]{--theme-glow:rgba(93,118,180,.24)}
+body[data-theme="ocean"] .section:not(.chapter-dark),body[data-theme="ocean"] .section.chapter-paper{background:linear-gradient(145deg,#eaf4f3,#d7e8e8 58%,#e7efeb)}
+body[data-theme="sunset"] .section:not(.chapter-dark),body[data-theme="sunset"] .section.chapter-paper{background:linear-gradient(145deg,#fff2e6,#efd9c8 58%,#f7e9d9)}
+body[data-theme="night"] .section:not(.chapter-dark),body[data-theme="night"] .section.chapter-paper{background:linear-gradient(145deg,#e7ebf5,#d5ddec 58%,#e7eaf2)}
+body[data-theme="forest"] .section:not(.chapter-dark){background:linear-gradient(145deg,#f7f3e9,#e9e1d1 58%,#f4efe4)}
+body[data-theme] .site-header{background:color-mix(in srgb,var(--ivory) 92%,transparent);backdrop-filter:blur(18px)}
+body[data-theme] .site-header.is-scrolled{box-shadow:0 12px 36px var(--theme-glow)}
+body[data-theme] .bird-card,body[data-theme] .destination-card,body[data-theme] .checklist-card{background:linear-gradient(150deg,var(--ivory),var(--paper));border-color:var(--line);box-shadow:0 12px 32px var(--theme-glow)}
+body[data-theme] .section-heading h2 em,body[data-theme] .opening h1 em,body[data-theme] .hero h2 em{color:var(--gold)}
+body[data-theme] .opening-shade{background:linear-gradient(90deg,color-mix(in srgb,var(--midnight) 88%,transparent),color-mix(in srgb,var(--midnight) 36%,transparent) 68%,transparent)}
+body[data-theme] .map-section,body[data-theme] .quiz-panel,body[data-theme] .site-footer{background:linear-gradient(135deg,var(--midnight),var(--forest-deep) 58%,var(--forest))}
+body[data-theme] .side-rail a{background:var(--midnight);border-color:var(--gold)}
+body[data-theme] .music-dock{background:linear-gradient(135deg,var(--midnight),var(--forest-deep));border-color:var(--gold);box-shadow:0 18px 55px var(--theme-glow)}
+body[data-theme] .tool-button:hover,body[data-theme] .gallery-filter[aria-pressed="true"]{background:var(--forest);color:var(--ivory)}
+.device-options button{overflow:hidden;padding:0 0 .85rem;gap:.55rem}
+.device-options button img{display:block;width:100%;height:112px;object-fit:cover;background:var(--paper)}
+.device-options button strong,.device-options button small{margin-inline:.45rem}
+.device-options button[aria-pressed="true"]{outline:2px solid var(--gold);outline-offset:2px}
+.music-mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:.35rem;margin:.7rem 0}
+.music-mode-tabs button{min-height:34px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;font-size:.58rem;font-weight:800;letter-spacing:.08em;cursor:pointer}
+.music-mode-tabs button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--midnight)}
+.music-select-label{display:block;margin:.35rem 0;color:var(--gold);font-size:.56rem;font-weight:800;letter-spacing:.12em}
+#websiteTrackSelect,#musicPlaylist{width:100%;min-height:36px;padding:.35rem;background:#17392f;color:#fff;border:1px solid rgba(255,255,255,.3);font-size:.68rem}
+#customMusicPanel[hidden],#websiteMusicPanel[hidden]{display:none}
+.music-dock audio{margin-top:.65rem}
+@media(max-width:600px){.device-options button img{height:86px}.device-setup-card{padding:1rem}.music-mode-tabs button{font-size:.52rem}}
