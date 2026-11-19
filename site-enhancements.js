@@ -16,7 +16,7 @@
     try{localStorage.setItem('wok-device',device);}catch{}
     if(deviceDialog?.open) deviceDialog.close();
     if(deviceButton) deviceButton.textContent = device.toUpperCase();
-    $('#liveMessage').textContent = deviceNames[device]+' layout selected.';
+    const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent = deviceNames[device]+' layout selected.';
     window.dispatchEvent(new Event('resize'));
   };
   // Ask on every fresh visit, even when a previous device choice was saved.
@@ -55,15 +55,15 @@
   };
   let mode='website',tracks=[],urls=[];
   const clearUrls=()=>{urls.forEach(URL.revokeObjectURL);urls=[];};
-  const playWebsiteTrack=(key,autoplay=false)=>{const t=websiteTracks[key]||websiteTracks.forest;audio.src=t.url;audio.load();title.textContent=t.name;artist.textContent=t.artist;if(autoplay)audio.play().catch(()=>{$('#liveMessage').textContent='Press play to start this website track.';});};
+  const playWebsiteTrack=(key,autoplay=false)=>{const t=websiteTracks[key]||websiteTracks.forest;audio.src=t.url;audio.load();title.textContent=t.name;artist.textContent=t.artist;if(autoplay)audio.play().catch(()=>{const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent='Press play to start this website track.';});};
   const selectTrack=(index,autoplay=false)=>{const t=tracks[index];if(!t)return;audio.src=t.url;audio.load();playlist.value=String(index);title.textContent=t.name;artist.textContent='Custom audio · this device';if(autoplay)audio.play().catch(()=>{});};
   const setMusicMode=next=>{mode=next;websitePanel.hidden=mode!=='website';customPanel.hidden=mode!=='custom';document.querySelectorAll('[data-music-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.musicMode===mode)));if(mode==='website')playWebsiteTrack(trackSelect.value||body.dataset.theme||'forest');else if(tracks.length)selectTrack(Number(playlist.value)||0);else{audio.removeAttribute('src');audio.load();title.textContent='Add your own soundtrack';artist.textContent='Your audio stays on this device';}};
   document.querySelectorAll('[data-music-mode]').forEach(b=>b.addEventListener('click',()=>setMusicMode(b.dataset.musicMode)));
   trackSelect?.addEventListener('change',()=>playWebsiteTrack(trackSelect.value,true));
-  input?.addEventListener('change',()=>{clearUrls();tracks=Array.from(input.files||[]).filter(file=>file.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|aac|flac)$/i.test(file.name)).map(file=>({name:file.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(file)}));playlist.replaceChildren();tracks.forEach((t,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=t.name;playlist.append(o);});playlist.disabled=!tracks.length;if(tracks.length){selectTrack(0,true);$('#liveMessage').textContent=tracks.length+' personal track(s) added.';}});
+  input?.addEventListener('change',()=>{clearUrls();tracks=Array.from(input.files||[]).filter(file=>file.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|aac|flac)$/i.test(file.name)).map(file=>({name:file.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(file)}));playlist.replaceChildren();tracks.forEach((t,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=t.name;playlist.append(o);});playlist.disabled=!tracks.length;if(tracks.length){selectTrack(0,true);const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent=tracks.length+' personal track(s) added.';}});
   playlist?.addEventListener('change',()=>selectTrack(Number(playlist.value),true));
   $('#musicDockToggle')?.addEventListener('click',e=>{const dock=$('#musicDock'),collapsed=dock.classList.toggle('is-collapsed');e.currentTarget.textContent=collapsed?'+':'−';e.currentTarget.setAttribute('aria-expanded',String(!collapsed));});
-  audio?.addEventListener('error',()=>{$('#liveMessage').textContent='This track could not load. Try another website track or add a local audio file.';});
+  audio?.addEventListener('error',()=>{const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent='This track could not load. Try another website track or add a local audio file.';});
   const themeTrack=()=>{if(mode==='website'&&trackSelect){trackSelect.value=Object.prototype.hasOwnProperty.call(websiteTracks,body.dataset.theme)?body.dataset.theme:'forest';playWebsiteTrack(trackSelect.value);}};
   new MutationObserver(themeTrack).observe(body,{attributes:true,attributeFilter:['data-theme']});
   window.addEventListener('pagehide',()=>{audio?.pause();clearUrls();},{once:true});
