@@ -96,3 +96,9 @@ body[data-device="tablet"] .kerala-grid,body[data-device="tablet"] .habitat-list
 body[data-device="phone"] main,body[data-device="tablet"] main{min-width:0;max-width:100%}
 body[data-device="phone"] .section,body[data-device="tablet"] .section{min-width:0}
 body[data-device="phone"] .bird-card,body[data-device="phone"] .destination-card,body[data-device="phone"] .special-site,body[data-device="phone"] .kerala-card{min-width:0}
+
+/* Keep fixed controls inside the selected device preview rather than stretching across the host monitor. */
+body[data-device="phone"] .site-header{left:50%;right:auto;width:min(430px,100vw);transform:translateX(-50%)}
+body[data-device="tablet"] .site-header{left:50%;right:auto;width:min(900px,100vw);transform:translateX(-50%)}
+body[data-device="phone"] .music-dock{left:50%;transform:translateX(-50%);width:min(414px,calc(100vw - 16px))}
+body[data-device="tablet"] .music-dock{left:max(12px,calc(50% - 438px))}
