@@ -1,0 +1,13 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# local preview / deploy state
+.vercel/
+node_modules/
+*.log
+
+# temporary files
+*.tmp

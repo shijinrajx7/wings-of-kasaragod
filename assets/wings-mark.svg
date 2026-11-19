@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Wings of Kasaragod</title>
+  <rect width="512" height="512" rx="112" fill="#183a32"/>
+  <path d="M102 313c77-17 144-75 226-185-24 72-50 117-83 157 45-23 94-61 151-118-28 56-60 102-101 140 34-10 71-29 112-58-43 55-95 98-157 125-47 21-94 29-148 28 51-24 96-55 135-93-41 22-85 39-135 50Z" fill="none" stroke="#f3ead9" stroke-linecap="round" stroke-linejoin="round" stroke-width="17"/>
+  <path d="M138 356c95-12 177-58 249-135" fill="none" stroke="#d3a958" stroke-linecap="round" stroke-width="12"/>
+  <circle cx="111" cy="311" r="13" fill="#d3a958"/>
+</svg>
