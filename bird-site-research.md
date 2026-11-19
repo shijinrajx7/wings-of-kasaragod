@@ -29,3 +29,27 @@ A 7 December 2025 *Onmanorama* report describes a Gadwall sighting in Udinoor pa
 ## Regional species occurrence evidence available for profiles
 
 The Kidoor paper supports local records of Orange-breasted Green Pigeon, Lesser Sand Plover and Indian Nightjar. The Chemmattamvayal paper supports local records of White-throated Kingfisher, Indian Pond Heron, Spotted Dove, Garganey, Common Teal, Black-headed Ibis and Oriental Darter. The ZSI Kumbla–Shiriya account supports its named shorebird examples; the 2023 update documents a Great Thick-knee individual there in 2020–21. The 2025 *Onmanorama* story reports a Gadwall at Udinoor but the underlying eBird record was inaccessible. These local records do not establish abundance, current population or occurrence in every Kasaragod habitat.
+
+
+## Later district checklist updates and locality coverage (reviewed 19 November 2026)
+
+The 2023 update by Maxim Rodrigues adds 34 species to the 366-species 2020 district checklist, for a published total of 400. The updated field guide includes these 34 additions; Great Thick-knee was already present in the earlier curated profiles and is not duplicated.
+
+Two later district additions are included as dated news-reported records:
+- Kashmir Flycatcher (*Ficedula subrubra*) at Chemmattamvayal, reported in May 2026; the report attributes a district total of 414 to eBird.
+- Black-breasted Weaver (*Ploceus benghalensis*) at Cheemeni Ariyittapara, reported on 26 October 2026; the report says this raised the district total to 421.
+
+These are dated district-level totals, not a complete downloadable 421-species list. The 2023 article is the latest fully itemized published additions list located during this review. The site therefore labels its bird cards as documented records and does not claim that the illustrated cards alone constitute the entire district checklist.
+
+### Kolathur and Kundamkuzhy
+
+The Bedadka Grama Panchayat profile identifies Kolathur and Kundamkuzhy among its villages/divisions, but does not provide bird records or a locality checklist. The DTPC Kasaragod description of Thonikadavu identifies it as being in Kundamkuzhy village and describes evergreen meadows, forest and watercourses; it does not name bird species. No species are assigned to Kolathur or Thonikadavu solely from district-wide records.
+
+The 2023 district-update record of Tickell’s Leaf Warbler is specifically located at Thachiru Mala, Koliyar on 7 November 2020. The source does not establish that this is Kolathur, so the site preserves the published locality name without relabelling it.
+
+Sources:
+- [Rodrigues (2023), district checklist additions through February 2023](https://www.researchgate.net/publication/374510390_Checklist_of_the_birds_of_Kasaragod_district_additions_till_February_2023)
+- [Kashmir Flycatcher report, 16 May 2026](https://www.onmanorama.com/news/kerala/2026/05/16/rare-kashmir-flycatcher-kasaragod-sighting.html)
+- [Black-breasted Weaver report, 26 October 2026](https://www.onmanorama.com/news/kerala/2026/10/26/black-breasted-weaver-sighting-kasaragod.html)
+- [DTPC Kasaragod — Thonikadavu, Kundamkuzhy](https://www.dtpckasaragod.com/destination/thonikadavu-kundamkuzhy)
+- [Bedadka Grama Panchayat](https://bedadkapanchayat.lsgkerala.gov.in/en)
