@@ -25,12 +25,12 @@
   $('#deviceAutoChoice')?.addEventListener('click',()=>applyDevice(matchMedia('(max-width:600px)').matches?'phone':matchMedia('(max-width:1000px)').matches?'tablet':'laptop'));
   document.querySelectorAll('[data-device-choice]').forEach(btn=>btn.addEventListener('click',()=>applyDevice(btn.dataset.deviceChoice)));
   deviceDialog?.addEventListener('click',e=>{if(e.target===deviceDialog) deviceDialog.close();});
-  const themes=['forest','ocean','sunset','night'];
-  const themeLabels={forest:'FOREST',ocean:'OCEAN',sunset:'SUNSET',night:'NIGHT'};
+  const themes=['forest','ocean','sunset','night','mist','monsoon'];
+  const themeLabels={forest:'FOREST',ocean:'OCEAN',sunset:'SUNSET',night:'NIGHT',mist:'MIST',monsoon:'MONSOON'};
   let theme='forest';
   try{theme=localStorage.getItem('wok-theme')||'forest';}catch{}
   if(!themes.includes(theme)) theme='forest';
-  const applyTheme=()=>{body.dataset.theme=theme;$('#themeCycle').textContent='THEME · '+themeLabels[theme];try{localStorage.setItem('wok-theme',theme);}catch{}};
+  const applyTheme=()=>{body.dataset.theme=theme;const toggle=$('#themeCycle');if(toggle){toggle.title='Theme: '+themeLabels[theme]+' · click to change';toggle.setAttribute('aria-label','Current theme '+themeLabels[theme]+'. Activate to switch theme.');toggle.setAttribute('data-current-theme',theme);}try{localStorage.setItem('wok-theme',theme);}catch{}};
   applyTheme();
   $('#themeCycle')?.addEventListener('click',()=>{theme=themes[(themes.indexOf(theme)+1)%themes.length];applyTheme();});
   const motion=$('#motionToggle');
@@ -46,6 +46,8 @@
     forest:{name:'This Land Is Your Land',artist:'Traditional folk song · public-domain recording',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/This_Land_is_Your_Land.ogg'},
     ocean:{name:'Over the River and Through the Wood',artist:'Traditional folk song · Wikimedia Commons',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Over_The_River_And_Through_The_Wood.ogg'},
     sunset:{name:'Warm Sunset',artist:'MusicLFiles · CC BY 4.0 · instrumental',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Warm_Sunset_by_MusicLFiles.ogg'},
+    mist:{name:'Scarborough Fair',artist:'Traditional vocal ballad · Wikimedia Commons · CC BY-SA 3.0 / GFDL',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Scarborough_Fair.ogg'},
+    monsoon:{name:'Amazing Grace (1922 choir recording)',artist:'Original Sacred Harp Choir · Wikimedia Commons · US public domain; check local rights',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Amazing_grace_1922.ogg'},
     night:{name:'Frankie and Johnny',artist:'Traditional folk song · public-domain recording',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/FrankieandJohnny.ogg'}
   };
   let mode='website',tracks=[],urls=[];
