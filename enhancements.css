@@ -282,3 +282,11 @@ body.motion-off .bird-card,body.motion-off .destination-card,body.motion-off .sp
   }
   .site-header .primary-nav.is-open a::after{display:none!important}
 }
+
+/* Creator credit in the site identity */
+.brand-identity{display:inline-flex;flex-direction:column;align-items:flex-start;gap:3px;line-height:1}
+.brand-identity>span{white-space:nowrap}
+.brand-identity small{font:700 .56rem/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.19em;color:var(--gold,#c6a15b)}
+.site-header:not(.is-scrolled) .brand-identity small{color:#f2c875}
+.brand-footer .brand-identity small{color:var(--gold,#c6a15b)}
+@media(max-width:520px){.brand-identity small{font-size:.5rem;letter-spacing:.15em}}
