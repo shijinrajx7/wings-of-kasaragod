@@ -164,3 +164,45 @@ body[data-device="tablet"] .opening-copy{margin-top:3.5rem;margin-bottom:4rem}
 @media(max-width:1100px){.opening-copy{width:min(760px,calc(100% - 56px));margin-left:clamp(28px,6vw,72px)}}
 @media(max-height:720px) and (min-width:701px){.opening{min-height:100svh;padding-top:76px;padding-bottom:30px}.opening-copy{margin-top:1rem;margin-bottom:2.8rem}.opening h1{font-size:clamp(3.4rem,7.6vw,7.2rem)}.opening-secondary{margin-top:1.2rem}.opening-place,.scroll-cue{bottom:16px}}
 @media(max-width:700px){.opening-copy{width:calc(100% - 40px);margin:1.2rem 20px 3.5rem}.opening h1{font-size:clamp(3rem,14vw,5.3rem)}.opening-shade{background:linear-gradient(90deg,rgba(3,16,13,.78),rgba(3,16,13,.35)),linear-gradient(0deg,rgba(3,16,13,.76),rgba(3,16,13,.18))}}
+
+/* VIEWPORT FIX: the laptop preview must use the entire browser canvas, not a centred 1600px mock frame. */
+html,body{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;overflow-x:hidden!important}
+body[data-device="laptop"],body[data-device="tablet"],body[data-device="phone"]{width:100%!important;max-width:100%!important;margin:0!important;border:0!important;box-shadow:none!important}
+body[data-device="laptop"] main,body[data-device="laptop"] .opening,body[data-device="laptop"] .hero,body[data-device="laptop"] .section{width:100%!important;max-width:none!important}
+body[data-device="laptop"] .opening{min-height:calc(100svh - 0px);min-height:100dvh}
+body[data-device="laptop"] .opening-image{object-fit:cover;object-position:center 50%}
+body[data-device="laptop"] .opening-copy{width:min(900px,64vw);margin-left:clamp(34px,8vw,150px);margin-right:24px}
+body[data-device="laptop"] .opening h1{font-size:clamp(4rem,8.5vw,9rem)}
+/* Keep all media crisp: no cursor-driven 3D movement, hover zoom, brightness filters or fractional parallax. */
+.opening-image{animation:none!important;transform:scale(1.015)!important;filter:none!important;transition:none!important;will-change:auto!important}
+.opening-copy,.opening-birds,.flight-scene{transform:none!important;transition:none!important;will-change:auto!important}
+.hero-image-wrap img{transform:none!important;filter:none!important;transition:none!important;will-change:auto!important}
+.destination-card img,.bird-card-image img,.kerala-card>img,.destination-feature-image img{transform:none!important;filter:none!important;transition:box-shadow .25s ease!important}
+.destination-card:hover img,.bird-card:hover .bird-card-image img,.kerala-card:hover>img,.destination-feature:hover .destination-feature-image img{transform:none!important;filter:none!important}
+.destination-card,.bird-card,.special-site,.kerala-card{transform:none!important;transition:box-shadow .25s ease,border-color .25s ease!important}
+.opening{perspective:none!important}
+.opening-shade{background:linear-gradient(90deg,rgba(4,18,15,.88) 0%,rgba(4,18,15,.70) 44%,rgba(4,18,15,.42) 100%),linear-gradient(0deg,rgba(4,18,15,.62),rgba(4,18,15,.08) 60%)!important}
+.opening .eyebrow-light,.opening-tagline,.opening-secondary,.opening-place,.scroll-cue,.opening .text-link-light{color:#fff!important;text-shadow:0 2px 9px rgba(0,0,0,.95)!important}
+.opening-secondary{background:rgba(5,20,16,.45)!important;border-top-color:rgba(255,255,255,.65)!important}
+.site-header:not(.is-scrolled){background:rgba(5,22,18,.88)!important;color:#fff!important}
+.site-header:not(.is-scrolled) .primary-nav a,.site-header:not(.is-scrolled) .brand,.site-header:not(.is-scrolled) .header-tools button{color:#fff!important}
+.theme-switch{width:42px!important;min-width:42px!important;height:42px!important;padding:0!important;border-radius:50%!important;display:inline-grid!important;place-items:center!important;font-size:1.35rem!important;line-height:1!important;border:1px solid currentColor!important;backdrop-filter:blur(8px)}
+.theme-switch>span:first-child{display:block;font-size:1.55rem;line-height:1}
+.theme-switch:hover{background:var(--gold)!important;color:var(--midnight)!important;transform:rotate(12deg)}
+/* Expanded theme palettes apply to the whole page: typography, surfaces, cards, map, controls and footer. */
+body[data-theme="forest"]{--ivory:#f4f0e5;--paper:#e7dfcf;--ink:#17291f;--muted:#53675b;--line:#cfcbbb;--midnight:#0a241d;--forest-deep:#10382d;--forest:#1a4b3b;--gold:#c6a15b;--theme-glow:rgba(61,111,76,.2)}
+body[data-theme="ocean"]{--ivory:#edf5f3;--paper:#d9e8e7;--ink:#15313b;--muted:#45616a;--line:#bfd1d1;--midnight:#102d3b;--forest-deep:#17495c;--forest:#226b7c;--gold:#d3ad70;--theme-glow:rgba(45,116,143,.22)}
+body[data-theme="sunset"]{--ivory:#fff2e7;--paper:#efddce;--ink:#3c2924;--muted:#765b4e;--line:#ddc3b2;--midnight:#39231f;--forest-deep:#623b30;--forest:#88513c;--gold:#e2b36d;--theme-glow:rgba(169,94,63,.22)}
+body[data-theme="night"]{--ivory:#e9edf5;--paper:#d9dfeb;--ink:#202b40;--muted:#526078;--line:#bfc9da;--midnight:#111b2c;--forest-deep:#1a2b45;--forest:#29466a;--gold:#d5bd83;--theme-glow:rgba(70,99,151,.24)}
+body[data-theme="mist"]{--ivory:#f1f3ee;--paper:#dfe6df;--ink:#26362f;--muted:#5d7066;--line:#cbd5ca;--midnight:#263a37;--forest-deep:#38584f;--forest:#55766a;--gold:#b99b68;--theme-glow:rgba(116,145,130,.2)}
+body[data-theme="monsoon"]{--ivory:#eaf0f2;--paper:#d4e0e5;--ink:#1e303c;--muted:#526875;--line:#bdcbd2;--midnight:#142a37;--forest-deep:#1c4656;--forest:#286276;--gold:#c5a66d;--theme-glow:rgba(44,105,132,.24)}
+body[data-theme] .section:not(.chapter-dark){background:linear-gradient(145deg,var(--ivory),var(--paper) 62%,var(--ivory))!important;color:var(--ink)}
+body[data-theme] .chapter-paper{background:linear-gradient(145deg,var(--paper),var(--ivory))!important;color:var(--ink)}
+body[data-theme] .bird-card,body[data-theme] .destination-card,body[data-theme] .special-site,body[data-theme] .kerala-card,body[data-theme] .checklist-card,body[data-theme] .fact-card{background:linear-gradient(145deg,var(--ivory),var(--paper))!important;color:var(--ink)!important;border-color:var(--line)!important}
+body[data-theme] .section-lede,body[data-theme] .destination-feature-copy p,body[data-theme] .section-footnote,body[data-theme] .section-note p{color:var(--muted)!important}
+body[data-theme] .chapter-dark,body[data-theme] .map-section,body[data-theme] .quiz-panel,body[data-theme] .site-footer{background:linear-gradient(135deg,var(--midnight),var(--forest-deep) 62%,var(--forest))!important}
+body[data-theme] .site-header.is-scrolled{background:color-mix(in srgb,var(--ivory) 96%,transparent)!important;color:var(--ink)!important}
+body[data-theme] .site-header.is-scrolled .primary-nav a,body[data-theme] .site-header.is-scrolled .brand,body[data-theme] .site-header.is-scrolled .header-tools button{color:var(--ink)!important}
+body[data-theme] .button-outline,body[data-theme] .gallery-filter,body[data-theme] .tool-button{border-color:var(--line)}
+body[data-theme] .music-dock{background:linear-gradient(135deg,var(--midnight),var(--forest-deep))!important;border-color:var(--gold)!important}
+@media(max-width:700px){body[data-device="phone"] .opening{width:100vw!important;min-height:100svh}body[data-device="phone"] .opening-copy{margin-inline:20px;width:calc(100% - 40px)}body[data-device="phone"] .opening h1{font-size:clamp(2.8rem,13vw,5rem);overflow-wrap:anywhere}}
