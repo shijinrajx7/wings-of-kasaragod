@@ -61,7 +61,7 @@
   playlist?.addEventListener('change',()=>selectTrack(Number(playlist.value),true));
   $('#musicDockToggle')?.addEventListener('click',e=>{const dock=$('#musicDock'),collapsed=dock.classList.toggle('is-collapsed');e.currentTarget.textContent=collapsed?'+':'−';e.currentTarget.setAttribute('aria-expanded',String(!collapsed));});
   audio?.addEventListener('error',()=>{$('#liveMessage').textContent='This track could not load. Try another website track or add a local audio file.';});
-  const themeTrack=()=>{if(mode==='website'&&trackSelect){trackSelect.value=body.dataset.theme in websiteTracks?body.dataset.theme:'forest';playWebsiteTrack(trackSelect.value);}};
+  const themeTrack=()=>{if(mode==='website'&&trackSelect){trackSelect.value=Object.prototype.hasOwnProperty.call(websiteTracks,body.dataset.theme)?body.dataset.theme:'forest';playWebsiteTrack(trackSelect.value);}};
   new MutationObserver(themeTrack).observe(body,{attributes:true,attributeFilter:['data-theme']});
   window.addEventListener('pagehide',()=>{audio?.pause();clearUrls();},{once:true});
   setMusicMode('website');
