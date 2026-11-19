@@ -22,6 +22,7 @@
     else applyDevice(detected);
   }
   $('#deviceSetupButton')?.addEventListener('click',()=>deviceDialog?.showModal());
+  $('#deviceAutoChoice')?.addEventListener('click',()=>applyDevice(matchMedia('(max-width:600px)').matches?'phone':matchMedia('(max-width:1000px)').matches?'tablet':'laptop'));
   document.querySelectorAll('[data-device-choice]').forEach(btn=>btn.addEventListener('click',()=>applyDevice(btn.dataset.deviceChoice)));
   deviceDialog?.addEventListener('click',e=>{if(e.target===deviceDialog) deviceDialog.close();});
   const themes=['forest','ocean','sunset','night'];
@@ -40,24 +41,26 @@
   motion?.addEventListener('click',()=>{motionOn=!motionOn;applyMotion();});
   const audio=$('#fieldMusicAudio'), input=$('#musicFiles'), playlist=$('#musicPlaylist');
   const title=$('#musicTrackTitle'), artist=$('#musicTrackArtist');
-  let tracks=[], urls=[];
-  const clearUrls=()=>{urls.forEach(URL.revokeObjectURL);urls=[];};
-  const selectTrack=(index,autoplay=false)=>{
-    const track=tracks[index];if(!track||!audio)return;
-    audio.src=track.url;audio.load();playlist.value=String(index);
-    title.textContent=track.name;artist.textContent='Your device · personal audio file';
-    if(autoplay) audio.play().catch(()=>{});
+  const websitePanel=$('#websiteMusicPanel'), customPanel=$('#customMusicPanel'), trackSelect=$('#websiteTrackSelect');
+  const websiteTracks={
+    forest:{name:'This Land Is Your Land',artist:'Traditional folk song · public-domain recording',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/This_Land_is_Your_Land.ogg'},
+    ocean:{name:'Over the River and Through the Wood',artist:'Traditional folk song · Wikimedia Commons',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Over_The_River_And_Through_The_Wood.ogg'},
+    sunset:{name:'Warm Sunset',artist:'MusicLFiles · CC BY 4.0 · instrumental',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/Warm_Sunset_by_MusicLFiles.ogg'},
+    night:{name:'Frankie and Johnny',artist:'Traditional folk song · public-domain recording',url:'https://commons.wikimedia.org/wiki/Special:Redirect/file/FrankieandJohnny.ogg'}
   };
-  input?.addEventListener('change',()=>{
-    clearUrls();tracks=Array.from(input.files||[]).filter(f=>f.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|aac|flac)$/i.test(f.name)).map(file=>({name:file.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(file)}));
-    playlist.replaceChildren();
-    tracks.forEach((track,i)=>{const option=document.createElement('option');option.value=String(i);option.textContent=track.name;playlist.append(option);});
-    playlist.disabled=!tracks.length;
-    if(tracks.length){selectTrack(0,true);$('#liveMessage').textContent=tracks.length+' song'+(tracks.length===1?'':'s')+' added to your local playlist.';}
-    else{title.textContent='Choose your own vocal soundtrack';artist.textContent='No playable audio file selected';}
-  });
+  let mode='website',tracks=[],urls=[];
+  const clearUrls=()=>{urls.forEach(URL.revokeObjectURL);urls=[];};
+  const playWebsiteTrack=(key,autoplay=false)=>{const t=websiteTracks[key]||websiteTracks.forest;audio.src=t.url;audio.load();title.textContent=t.name;artist.textContent=t.artist;if(autoplay)audio.play().catch(()=>{$('#liveMessage').textContent='Press play to start this website track.';});};
+  const selectTrack=(index,autoplay=false)=>{const t=tracks[index];if(!t)return;audio.src=t.url;audio.load();playlist.value=String(index);title.textContent=t.name;artist.textContent='Custom audio · this device';if(autoplay)audio.play().catch(()=>{});};
+  const setMusicMode=next=>{mode=next;websitePanel.hidden=mode!=='website';customPanel.hidden=mode!=='custom';document.querySelectorAll('[data-music-mode]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.musicMode===mode)));if(mode==='website')playWebsiteTrack(trackSelect.value||body.dataset.theme||'forest');else if(tracks.length)selectTrack(Number(playlist.value)||0);else{audio.removeAttribute('src');audio.load();title.textContent='Add your own soundtrack';artist.textContent='Your audio stays on this device';}};
+  document.querySelectorAll('[data-music-mode]').forEach(b=>b.addEventListener('click',()=>setMusicMode(b.dataset.musicMode)));
+  trackSelect?.addEventListener('change',()=>playWebsiteTrack(trackSelect.value,true));
+  input?.addEventListener('change',()=>{clearUrls();tracks=Array.from(input.files||[]).filter(file=>file.type.startsWith('audio/')||/\.(mp3|m4a|ogg|wav|aac|flac)$/i.test(file.name)).map(file=>({name:file.name.replace(/\.[^.]+$/,''),url:URL.createObjectURL(file)}));playlist.replaceChildren();tracks.forEach((t,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=t.name;playlist.append(o);});playlist.disabled=!tracks.length;if(tracks.length){selectTrack(0,true);$('#liveMessage').textContent=tracks.length+' personal track(s) added.';}});
   playlist?.addEventListener('change',()=>selectTrack(Number(playlist.value),true));
   $('#musicDockToggle')?.addEventListener('click',e=>{const dock=$('#musicDock'),collapsed=dock.classList.toggle('is-collapsed');e.currentTarget.textContent=collapsed?'+':'−';e.currentTarget.setAttribute('aria-expanded',String(!collapsed));});
-  audio?.addEventListener('ended',()=>{if(tracks.length){const next=(Number(playlist.value)+1)%tracks.length;selectTrack(next,true);}});
+  audio?.addEventListener('error',()=>{$('#liveMessage').textContent='This track could not load. Try another website track or add a local audio file.';});
+  const themeTrack=()=>{if(mode==='website'&&trackSelect){trackSelect.value=body.dataset.theme in websiteTracks?body.dataset.theme:'forest';playWebsiteTrack(trackSelect.value);}};
+  new MutationObserver(themeTrack).observe(body,{attributes:true,attributeFilter:['data-theme']});
   window.addEventListener('pagehide',()=>{audio?.pause();clearUrls();},{once:true});
+  setMusicMode('website');
 })();
