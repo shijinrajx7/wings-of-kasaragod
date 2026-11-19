@@ -272,28 +272,20 @@
   <aside class="side-rail" aria-label="Quick section navigation"><a href="#destinations" aria-label="Destinations" title="Destinations">01</a><a href="#mapSection" aria-label="Map" title="Map">02</a><a href="#birds" aria-label="Bird guide" title="Bird guide">03</a><a href="#gallery" aria-label="Gallery" title="Gallery">04</a><a href="#conservation" aria-label="Conservation" title="Conservation">05</a></aside>
 
   <section class="music-dock" id="musicDock" aria-label="Music player">
-    <div class="music-dock-head"><div><span class="music-kicker">WINGS SOUNDTRACK</span><strong id="musicTrackTitle">Choose your own vocal soundtrack</strong><small id="musicTrackArtist">Local audio files stay on this device</small></div><button id="musicDockToggle" type="button" aria-expanded="true" aria-label="Collapse music player">−</button></div>
-    <div class="music-controls" id="musicControls"><audio id="fieldMusicAudio" controls preload="none"></audio><div class="music-file-row"><label class="music-upload" for="musicFiles">＋ ADD SONGS</label><input id="musicFiles" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav" multiple><select id="musicPlaylist" aria-label="Choose a song" disabled><option>No songs added</option></select></div><p class="music-note">Add MP3/M4A/OGG songs you have permission to use. For openly licensed vocal tracks, <a href="https://www.muxiv.com/free?genre=Vocal&license=CC-BY" target="_blank" rel="noopener noreferrer">browse the CC BY vocal catalogue ↗</a>.</p></div>
+    <div class="music-dock-head"><div><span class="music-kicker">WINGS SOUNDTRACK · CURATED BY SHIJIN</span><strong id="musicTrackTitle">Choose a soundtrack</strong><small id="musicTrackArtist">Website music or your own audio</small></div><button id="musicDockToggle" type="button" aria-expanded="true" aria-label="Collapse music player">−</button></div>
+    <div class="music-controls" id="musicControls">
+      <div class="music-mode-tabs" role="group" aria-label="Music source"><button type="button" data-music-mode="website" aria-pressed="true">WEBSITE MUSIC</button><button type="button" data-music-mode="custom" aria-pressed="false">CUSTOM MUSIC</button></div>
+      <div id="websiteMusicPanel"><label class="music-select-label" for="websiteTrackSelect">SOUNDTRACK FOR THIS THEME</label><select id="websiteTrackSelect"><option value="forest">Forest · This Land Is Your Land</option><option value="ocean">Ocean · Over the River and Through the Wood</option><option value="sunset">Sunset · Warm Sunset (instrumental)</option><option value="night">Night · Frankie and Johnny</option></select><p class="music-note" id="websiteMusicCredit">Traditional folk song recording. Music starts only when you press play.</p></div>
+      <div id="customMusicPanel" hidden><label class="music-upload" for="musicFiles">＋ ADD MUSIC / RECORDING FROM DEVICE</label><input id="musicFiles" type="file" accept="audio/*,.mp3,.m4a,.ogg,.wav" multiple><select id="musicPlaylist" aria-label="Choose your own song" disabled><option>No personal tracks added</option></select><p class="music-note">Your selected files stay in this browser session and are not uploaded.</p></div>
+      <audio id="fieldMusicAudio" controls preload="none"></audio>
+      <p class="music-note">Website tracks are hosted on Wikimedia Commons. Check their source and licence before reusing them outside this site.</p>
+    </div>
   </section>
 
   <footer class="site-footer"><div class="wrap footer-row"><a class="brand brand-footer" href="#intro"><svg class="brand-mark" viewBox="0 0 42 28" aria-hidden="true"><path d="M2 21c8-9 12-15 18-18 1 7-1 12-5 17 6-7 13-12 25-14-4 10-13 17-25 19"/><path d="M4 25c8-4 14-5 21-4"/></svg><span><strong>WINGS</strong><i>/</i>KASARAGOD</span></a><p>A field guide to Kasaragod’s places, birds and habitats · Curated by <strong>Shijin</strong>.</p><a class="footer-top" href="#intro">BACK TO THE SKY ↑</a></div><div class="wrap footer-meta"><span>Educational project · English</span><span>Map data © OpenStreetMap contributors</span></div></footer>
 
-  <dialog class="device-dialog" id="deviceSetup" aria-labelledby="deviceSetupTitle"><form method="dialog" class="device-setup-card"><p class="eyebrow">PERSONALISE YOUR VIEW</p><h2 id="deviceSetupTitle">Which device are you using?</h2><p>Choose a layout. The page will fit its content to that screen frame, and you can change it anytime.</p><div class="device-options"><button type="button" data-device-choice="phone"><span class="device-icon">▯</span><strong>Phone</strong><small>Compact portrait view</small></button><button type="button" data-device-choice="tablet"><span class="device-icon">▭</span><strong>Tablet</strong><small>Balanced wide view</small></button><button type="button" data-device-choice="laptop"><span class="device-icon">▱</span><strong>Laptop</strong><small>Full desktop canvas</small></button></div><button class="device-later" type="submit">CONTINUE WITH CURRENT VIEW</button></form></dialog>
-  <dialog class="profile-dialog" id="birdDialog" aria-labelledby="dialogTitle">
-    <button class="dialog-close" type="button" data-close-dialog aria-label="Close bird profile">×</button>
-    <div class="dialog-content" id="birdDialogContent"></div>
-  </dialog>
-  <dialog class="profile-dialog" id="destinationDialog" aria-labelledby="destinationDialogTitle">
-    <button class="dialog-close" type="button" data-close-dialog aria-label="Close destination field note">×</button>
-    <div class="dialog-content" id="destinationDialogContent"></div>
-  </dialog>
-  <dialog class="lightbox-dialog" id="lightboxDialog" aria-label="Photo gallery lightbox">
-    <button class="dialog-close lightbox-close" type="button" data-close-dialog aria-label="Close photo">×</button>
-    <button class="lightbox-arrow lightbox-prev" type="button" aria-label="Previous photograph">←</button>
-    <figure class="lightbox-figure"><img id="lightboxImage" alt=""><figcaption id="lightboxCaption"></figcaption></figure>
-    <button class="lightbox-arrow lightbox-next" type="button" aria-label="Next photograph">→</button>
-    <p class="lightbox-count" id="lightboxCount" aria-live="polite"></p>
-  </dialog>
-  <div class="sr-only" id="liveMessage" aria-live="polite" aria-atomic="true"></div>
-</body>
-</html>
+  <dialog class="device-dialog" id="deviceSetup" aria-labelledby="deviceSetupTitle"><form method="dialog" class="device-setup-card"><p class="eyebrow">PERSONALISE YOUR VIEW</p><h2 id="deviceSetupTitle">Choose your screen.</h2><p>Preview the field guide in a layout designed for your device. You can switch any time.</p><div class="device-options">
+    <button type="button" data-device-choice="phone"><img src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=700&q=85" alt="Smartphone device preview"><strong>Phone</strong><small>Portrait · compact navigation</small></button>
+    <button type="button" data-device-choice="tablet"><img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=700&q=85" alt="Tablet device preview"><strong>Tablet</strong><small>Balanced · spacious columns</small></button>
+    <button type="button" data-device-choice="laptop"><img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=700&q=85" alt="Laptop device preview"><strong>Laptop</strong><small>Wide · full field experience</small></button>
+  </div><button class="device-later" id="deviceAutoChoice" type="button">USE DETECTED DEVICE</button></form></dialog>
