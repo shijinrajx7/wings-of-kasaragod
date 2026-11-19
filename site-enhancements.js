@@ -3,28 +3,31 @@
   const $ = (s, r=document) => r.querySelector(s);
   const body = document.body;
   const deviceDialog = $('#deviceSetup');
+  const deviceButton = $('#deviceSetupButton');
   const deviceNames = {phone:'Phone',tablet:'Tablet',laptop:'Laptop'};
+  const detectDevice = () => matchMedia('(max-width:600px)').matches ? 'phone' : matchMedia('(max-width:1000px)').matches ? 'tablet' : 'laptop';
+  let savedDevice = null;
+  try{savedDevice=localStorage.getItem('wok-device');}catch{}
+  const initialDevice = deviceNames[savedDevice] ? savedDevice : detectDevice();
+  body.dataset.device = initialDevice;
   const applyDevice = (device) => {
     if(!deviceNames[device]) return;
     body.dataset.device = device;
     try{localStorage.setItem('wok-device',device);}catch{}
     if(deviceDialog?.open) deviceDialog.close();
-    $('#deviceSetupButton').textContent = device.toUpperCase();
+    if(deviceButton) deviceButton.textContent = device.toUpperCase();
     $('#liveMessage').textContent = deviceNames[device]+' layout selected.';
     window.dispatchEvent(new Event('resize'));
   };
-  let savedDevice = null;
-  try{savedDevice=localStorage.getItem('wok-device');}catch{}
-  if(savedDevice) applyDevice(savedDevice);
-  else {
-    const detected = matchMedia('(max-width:600px)').matches ? 'phone' : matchMedia('(max-width:1000px)').matches ? 'tablet' : 'laptop';
-    if(deviceDialog?.showModal) deviceDialog.showModal();
-    else applyDevice(detected);
-  }
-  $('#deviceSetupButton')?.addEventListener('click',()=>deviceDialog?.showModal());
-  $('#deviceAutoChoice')?.addEventListener('click',()=>applyDevice(matchMedia('(max-width:600px)').matches?'phone':matchMedia('(max-width:1000px)').matches?'tablet':'laptop'));
+  // Ask on every fresh visit, even when a previous device choice was saved.
+  if(deviceDialog?.showModal) {
+    document.querySelectorAll('[data-device-choice]').forEach(btn=>btn.setAttribute('aria-pressed',String(btn.dataset.deviceChoice===initialDevice)));
+    try{deviceDialog.showModal();}catch{applyDevice(initialDevice);}
+  } else applyDevice(initialDevice);
+  deviceButton?.addEventListener('click',()=>{if(deviceDialog&&!deviceDialog.open)deviceDialog.showModal();});
+  $('#deviceAutoChoice')?.addEventListener('click',()=>applyDevice(detectDevice()));
   document.querySelectorAll('[data-device-choice]').forEach(btn=>btn.addEventListener('click',()=>applyDevice(btn.dataset.deviceChoice)));
-  deviceDialog?.addEventListener('click',e=>{if(e.target===deviceDialog) deviceDialog.close();});
+  deviceDialog?.addEventListener('cancel',e=>e.preventDefault());
   const themes=['forest','ocean','sunset','night','mist','monsoon'];
   const themeLabels={forest:'FOREST',ocean:'OCEAN',sunset:'SUNSET',night:'NIGHT',mist:'MIST',monsoon:'MONSOON'};
   let theme='forest';
