@@ -379,8 +379,8 @@
       $('#soundLabel').textContent=playing?'MUSIC ON':'MUSIC PLAY';
     };
     toggle.addEventListener('click',async()=>{
-      if(!audio.src){$('#musicFiles')?.click();$('#liveMessage').textContent='Add a song to start your soundtrack.';return;}
-      try{if(audio.paused) await audio.play();else audio.pause();}catch{$('#liveMessage').textContent='This audio file could not be played in this browser.';}
+      if(!audio.src){$('#musicFiles')?.click();const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent='Add a song to start your soundtrack.';return;}
+      try{if(audio.paused) await audio.play();else audio.pause();}catch{const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent='This audio file could not be played in this browser.';}
       sync();
     });
     ['play','pause','ended','error'].forEach(name=>audio.addEventListener(name,sync));
@@ -411,7 +411,7 @@
       const birdButton=event.target.closest('[data-bird]'); if(birdButton){openBird(birdButton.dataset.bird);return;}
       const destinationButton=event.target.closest('[data-destination]'); if(destinationButton){openDestination(destinationButton.dataset.destination);return;}
       const keralaButton=event.target.closest('[data-kerala]'); if(keralaButton){openKerala(keralaButton.dataset.kerala);return;}
-      const favoriteButton=event.target.closest('[data-favorite]'); if(favoriteButton){const values=getFavorites();const id=favoriteButton.dataset.favorite;const was=values.has(id);was?values.delete(id):values.add(id);saveFavorites(values);renderBirds();if($('#birdDialog').open){const bird=birds.find(item=>item.id===id);const btn=$('#birdDialog [data-favorite]');if(btn){btn.setAttribute('aria-pressed',String(!was));btn.textContent=was?'SAVE AS FAVOURITE':'REMOVE FAVOURITE';}}$('#liveMessage').textContent=was?'Removed from favourites.':'Added to favourites.';return;}
+      const favoriteButton=event.target.closest('[data-favorite]'); if(favoriteButton){const values=getFavorites();const id=favoriteButton.dataset.favorite;const was=values.has(id);was?values.delete(id):values.add(id);saveFavorites(values);renderBirds();if($('#birdDialog').open){const bird=birds.find(item=>item.id===id);const btn=$('#birdDialog [data-favorite]');if(btn){btn.setAttribute('aria-pressed',String(!was));btn.textContent=was?'SAVE AS FAVOURITE':'REMOVE FAVOURITE';}}const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent=was?'Removed from favourites.':'Added to favourites.';return;}
       const filterButton=event.target.closest('[data-gallery-filter]'); if(filterButton){selectedGallery=filterButton.dataset.galleryFilter;renderGallery();return;}
       const galleryButton=event.target.closest('[data-gallery-open]'); if(galleryButton){openLightbox(galleryButton.dataset.galleryOpen);return;}
       if(event.target.closest('[data-close-dialog]')){const dialog=event.target.closest('dialog');if(dialog?.open)dialog.close();}
@@ -518,7 +518,7 @@
     const madhur = destinations.find(place => place.id === 'madhur-temple');
     if (madhur) madhur.imageNote = 'Photograph depicts Madhur Temple; creator and licence are listed in the photo credits.';
     renderDestinations();populateHabitats();renderBirds();renderSpecialSites();renderHabitats();renderKerala();renderFacts();renderConservation();renderSources();renderGallery();initEvents();initMap();initSound();setupNavigation();initQuizImage();initDepthMotion();
-    $('#liveMessage').textContent='Field guide ready.';
+    const liveMessage=$('#liveMessage'); if(liveMessage) liveMessage.textContent='Field guide ready.';
   };
   init();
 })();
