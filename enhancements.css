@@ -218,3 +218,27 @@ body[data-theme] .music-dock{background:linear-gradient(135deg,var(--midnight),v
 .device-setup-card{max-height:none}
 .device-options button{cursor:pointer}
 .device-options button:focus-visible{outline:3px solid #e2b36d;outline-offset:3px}
+
+/* Apple-inspired motion: subtle, crisp and GPU-friendly. */
+@media (prefers-reduced-motion:no-preference){
+.motion-ready .reveal{opacity:0;transform:translate3d(0,22px,0);filter:none;transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1);will-change:opacity,transform}
+.motion-ready .reveal.is-visible{opacity:1;transform:translate3d(0,0,0)}
+.bird-card,.destination-card,.special-site,.kerala-card,.gallery-item{transition:transform .55s cubic-bezier(.2,.7,.2,1),box-shadow .55s cubic-bezier(.2,.7,.2,1),border-color .3s ease!important}
+.bird-card:hover,.destination-card:hover,.special-site:hover,.kerala-card:hover{transform:translate3d(0,-5px,0)!important;box-shadow:0 22px 48px rgba(15,40,32,.14)!important}
+.bird-card-image img,.destination-card img,.gallery-item img{transition:transform .8s cubic-bezier(.2,.7,.2,1)!important;filter:none!important}
+.bird-card:hover .bird-card-image img,.destination-card:hover img,.gallery-item:hover img{transform:scale(1.035)!important;filter:none!important}
+.button,.text-link,.tool-button,.sound-toggle,.gallery-filter{transition:color .25s ease,background-color .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease!important}
+.button:hover,.sound-toggle:hover{transform:translateY(-2px)}
+.profile-dialog[open]{animation:dialog-enter .38s cubic-bezier(.2,.75,.25,1) both}
+@keyframes dialog-enter{from{opacity:0;transform:translate(-50%,-47%) scale(.985)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.lightbox-dialog[open]{animation:lightbox-enter .35s ease both}
+@keyframes lightbox-enter{from{opacity:0}to{opacity:1}}
+}
+body.motion-off .reveal{opacity:1!important;transform:none!important;transition:none!important}
+body.motion-off .bird-card,body.motion-off .destination-card,body.motion-off .special-site,body.motion-off .kerala-card,body.motion-off img{transition:none!important;transform:none!important}
+.profile-dialog[open],.lightbox-dialog[open]{z-index:100000}
+.profile-dialog .dialog-content{min-height:180px}
+.lightbox-figure{margin:4vh auto;width:min(84vw,1100px);height:82vh;display:grid;place-items:center;color:#fff}
+.lightbox-figure img{max-width:100%;max-height:72vh;object-fit:contain}
+.lightbox-figure figcaption{padding:.8rem;color:rgba(255,255,255,.85);font-size:.8rem;text-align:center}
+@media(max-width:700px){.dialog-body{grid-template-columns:1fr}.dialog-hero{min-height:220px}.lightbox-figure{width:92vw;height:80vh}.lightbox-figure img{max-height:68vh}}
