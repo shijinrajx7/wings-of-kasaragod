@@ -22,7 +22,7 @@
     else applyDevice(detected);
   }
   $('#deviceSetupButton')?.addEventListener('click',()=>deviceDialog?.showModal());
-  $$('[data-device-choice]').forEach(btn=>btn.addEventListener('click',()=>applyDevice(btn.dataset.deviceChoice)));
+  document.querySelectorAll('[data-device-choice]').forEach(btn=>btn.addEventListener('click',()=>applyDevice(btn.dataset.deviceChoice)));
   deviceDialog?.addEventListener('click',e=>{if(e.target===deviceDialog) deviceDialog.close();});
   const themes=['forest','ocean','sunset','night'];
   const themeLabels={forest:'FOREST',ocean:'OCEAN',sunset:'SUNSET',night:'NIGHT'};
@@ -35,7 +35,7 @@
   const motion=$('#motionToggle');
   let motionOn=true;
   try{motionOn=localStorage.getItem('wok-motion')!=='off';}catch{}
-  const applyMotion=()=>{body.classList.toggle('motion-off',!motionOn);body.classList.toggle('motion-forced',motionOn);motion?.setAttribute('aria-pressed',String(motionOn));if(motion)motion.textContent=motionOn?'MOTION ON':'MOTION OFF';try{localStorage.setItem('wok-motion',motionOn?'on':'off');}catch{}};
+  const applyMotion=()=>{body.classList.toggle('motion-off',!motionOn);body.classList.toggle('motion-forced',motionOn);if(motionOn&&matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('motion-ready');document.querySelectorAll('.reveal').forEach(node=>node.classList.add('is-visible'));}motion?.setAttribute('aria-pressed',String(motionOn));if(motion)motion.textContent=motionOn?'MOTION ON':'MOTION OFF';try{localStorage.setItem('wok-motion',motionOn?'on':'off');}catch{}};
   applyMotion();
   motion?.addEventListener('click',()=>{motionOn=!motionOn;applyMotion();});
   const audio=$('#fieldMusicAudio'), input=$('#musicFiles'), playlist=$('#musicPlaylist');
