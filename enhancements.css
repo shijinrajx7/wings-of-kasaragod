@@ -61,3 +61,5 @@ body.motion-off .motion-ready .reveal{opacity:1;transform:none}
 @media(max-width:600px){.header-tools{gap:.25rem;justify-content:space-between}.tool-button{font-size:.46rem;padding-inline:.38rem}.sound-toggle{font-size:.47rem}.side-rail{display:none}.device-options{gap:.45rem}.device-options button{min-height:125px}.music-dock{left:10px;bottom:10px;width:calc(100vw - 20px)}.opening{min-height:100svh}}
 @media(min-width:901px){body[data-device="laptop"] .map-layout{grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr)}body[data-device="laptop"] .map-sidebar{position:sticky;top:105px;align-self:start}}
 @media(prefers-reduced-motion:reduce){body:not(.motion-forced) .opening-birds,body:not(.motion-forced) .flight-bird,body:not(.motion-forced) .flight-scene{animation:none!important}}
+
+@media(prefers-reduced-motion:reduce){body.motion-forced .opening-birds{animation:flight-drift 9s ease-in-out infinite!important}body.motion-forced .reveal{opacity:1!important;transform:none!important}}
