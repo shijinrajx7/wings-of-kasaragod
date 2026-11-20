@@ -290,3 +290,39 @@ body.motion-off .bird-card,body.motion-off .destination-card,body.motion-off .sp
 .site-header:not(.is-scrolled) .brand-identity small{color:#f2c875}
 .brand-footer .brand-identity small{color:var(--gold,#c6a15b)}
 @media(max-width:520px){.brand-identity small{font-size:.5rem;letter-spacing:.15em}}
+
+/* Cinematic Wings of Kasaragod entry sequence */
+body.entry-scene-active{overflow:hidden}
+.cinematic-entry{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;overflow:hidden;background:#071d19;color:#f8f4e9;isolation:isolate;opacity:1;transition:opacity .8s ease,transform .8s ease}
+.cinematic-entry.entry-leaving{opacity:0;transform:scale(1.035);pointer-events:none}
+.entry-landscape{position:absolute;inset:0;z-index:-3;background:linear-gradient(180deg,rgba(5,19,20,.10) 0%,rgba(5,23,21,.20) 35%,rgba(4,19,16,.92) 100%),url('assets/valiyaparamba-bridge.jpg') center 55%/cover no-repeat;transform:scale(1.045);animation:entry-landscape-drift 18s ease-in-out infinite alternate}
+.entry-grain{position:absolute;inset:0;z-index:-2;opacity:.13;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.3'/%3E%3C/svg%3E")}
+.entry-sun{position:absolute;z-index:-1;width:min(42vw,480px);aspect-ratio:1;border-radius:50%;top:8%;right:12%;background:radial-gradient(circle,rgba(232,195,130,.42),rgba(224,174,108,.08) 48%,transparent 70%);filter:blur(2px);animation:entry-sun-breathe 7s ease-in-out infinite alternate}
+.entry-flock{position:absolute;color:rgba(255,249,230,.88);pointer-events:none;filter:drop-shadow(0 3px 5px rgba(0,0,0,.25))}
+.entry-flock svg{display:block;width:100%;height:auto;overflow:visible}
+.entry-flock-one{width:min(55vw,700px);top:16%;left:-65%;animation:entry-flock-cross 13s linear infinite}
+.entry-flock-two{width:min(43vw,620px);top:31%;left:-75%;opacity:.68;animation:entry-flock-cross 17s linear 2.2s infinite}
+.entry-content{width:min(900px,90vw);padding:clamp(2rem,6vw,5rem) 1rem 5rem;text-align:center;animation:entry-content-rise 1.3s cubic-bezier(.2,.7,.2,1) both}
+.entry-kicker{display:flex;justify-content:center;align-items:center;gap:.8rem;margin:0 0 1.6rem;color:#e9d19b;font-size:.66rem;font-weight:800;letter-spacing:.23em}
+.entry-kicker span{width:34px;height:1px;background:#d8b875}
+.entry-content h1{margin:0;color:#fffdf5;font:400 clamp(3.5rem,10.5vw,9.5rem)/.79 Georgia,'Times New Roman',serif;letter-spacing:-.065em;text-shadow:0 8px 36px rgba(0,0,0,.24)}
+.entry-content h1 em{display:inline-block;margin-top:.12em;color:#e8bd73;font-weight:400}
+.entry-subtitle{margin:2rem 0 1.7rem;color:rgba(255,250,239,.92);font:400 clamp(1rem,2vw,1.35rem)/1.55 Georgia,serif;letter-spacing:.025em}
+.entry-rule{display:flex;justify-content:center;align-items:center;gap:12px;margin:0 auto 1.8rem;color:#f1d8a6;font-size:.58rem;font-weight:800;letter-spacing:.22em}
+.entry-rule span{width:38px;height:1px;background:rgba(236,203,145,.75)}
+.entry-enter{display:inline-flex;align-items:center;gap:2.2rem;min-height:58px;padding:0 1.5rem;border:1px solid #e9c783;background:#e9c783;color:#102c23;font-size:.69rem;font-weight:900;letter-spacing:.14em;cursor:pointer;transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease}
+.entry-enter b{font-size:1.1rem}
+.entry-enter:hover{background:#fff7e8;transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,.22)}
+.entry-enter:focus-visible,.entry-skip:focus-visible{outline:3px solid white;outline-offset:5px}
+.entry-skip{display:block;margin:1.15rem auto 0;padding:.5rem 1rem;border:0;background:transparent;color:#fff9eb;font-size:.61rem;font-weight:800;letter-spacing:.19em;cursor:pointer}
+.entry-skip:hover{color:#edc77f}
+.entry-credit{margin:1.1rem 0 0;color:rgba(255,250,239,.66);font-size:.65rem;letter-spacing:.09em}
+.entry-bottomline{position:absolute;left:clamp(1rem,4vw,3.5rem);right:clamp(1rem,4vw,3.5rem);bottom:clamp(1rem,3vh,2rem);display:flex;justify-content:center;align-items:center;gap:1rem;color:rgba(255,249,234,.78);font-size:.57rem;font-weight:700;letter-spacing:.16em}
+.entry-bottomline i{width:5px;height:5px;border-radius:50%;background:#e5bd78}
+@keyframes entry-flock-cross{0%{transform:translate3d(0,0,0) scale(.72);opacity:0}8%{opacity:.9}82%{opacity:.8}100%{transform:translate3d(190vw,-7vh,0) scale(1.12);opacity:0}}
+@keyframes entry-landscape-drift{from{transform:scale(1.045) translate3d(-.5%,0,0)}to{transform:scale(1.12) translate3d(.7%,-.6%,0)}}
+@keyframes entry-sun-breathe{from{transform:scale(.92);opacity:.65}to{transform:scale(1.08);opacity:1}}
+@keyframes entry-content-rise{from{opacity:0;transform:translateY(28px);filter:blur(5px)}to{opacity:1;transform:translateY(0);filter:blur(0)}}
+@media(max-width:600px){.entry-landscape{background-position:57% center}.entry-sun{width:75vw;top:10%;right:-8%}.entry-flock-one{width:85vw;top:17%}.entry-flock-two{width:70vw;top:28%}.entry-content{padding:3rem .25rem 5rem}.entry-kicker{font-size:.52rem;letter-spacing:.13em;gap:.45rem}.entry-content h1{font-size:clamp(3.3rem,14vw,5.8rem)}.entry-subtitle{margin:1.5rem 0}.entry-bottomline{font-size:.48rem;gap:.55rem;letter-spacing:.09em}}
+@media(prefers-reduced-motion:reduce){.entry-landscape,.entry-sun,.entry-flock-one,.entry-flock-two,.entry-content{animation:none!important}.entry-flock-one{left:18%;opacity:.65}.entry-flock-two{left:38%;opacity:.45}}
+body.motion-off .entry-landscape,body.motion-off .entry-sun,body.motion-off .entry-flock-one,body.motion-off .entry-flock-two,body.motion-off .entry-content{animation:none!important}
