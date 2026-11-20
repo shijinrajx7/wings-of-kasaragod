@@ -46,3 +46,29 @@
 .checklist-disclaimer strong{color:var(--ink)}
 @media(max-width:650px){.checklist-panel-heading{grid-template-columns:1fr;gap:.8rem}.checklist-grid{grid-template-columns:1fr}.checklist-card{min-height:165px}}
 @media(prefers-reduced-motion:reduce){.checklist-card{transition:none}.checklist-card:hover{transform:none}}
+
+/* Kasaragod migratory-bird field notes */
+.migration-species-link{display:inline-block;margin-left:1.25rem}
+.migration-fieldnotes{padding-block:clamp(4.5rem,8vw,7.5rem);background:var(--ivory,#f3eee3);color:var(--ink,#20352f)}
+.migrant-facts{display:grid;grid-template-columns:minmax(150px,.34fr) 1fr;gap:2rem;align-items:center;padding:1.5rem 0 2rem;margin-bottom:2rem;border-top:1px solid rgba(24,63,50,.22);border-bottom:1px solid rgba(24,63,50,.22)}
+.migrant-facts>div{display:flex;align-items:center;gap:1rem}
+.migrant-facts strong{font:400 clamp(3rem,6vw,5rem)/.9 var(--font-serif,Georgia,serif);color:var(--forest,#183f32)}
+.migrant-facts span,.migrant-facts p{font-size:.88rem;color:#53645e;max-width:620px}
+.migrant-facts p{margin:0}
+.migrant-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.1rem}
+.migrant-card{min-width:0;background:#fffdf8;border:1px solid rgba(24,63,50,.15);box-shadow:0 12px 30px rgba(28,49,40,.06);overflow:hidden;transition:transform .35s ease,box-shadow .35s ease}
+.migrant-card:hover{transform:translateY(-5px);box-shadow:0 20px 42px rgba(28,49,40,.12)}
+.migrant-card>img{display:block;width:100%;height:220px;object-fit:cover}
+.migrant-card-copy{padding:1.35rem}
+.migrant-card-copy .eyebrow{font-size:.58rem;letter-spacing:.13em;color:#98743b}
+.migrant-card-copy h3{margin:.45rem 0 .2rem;font:400 clamp(1.55rem,2.4vw,2.15rem)/1.08 var(--font-serif,Georgia,serif);color:#20352f}
+.migrant-card-copy>i{display:block;margin-bottom:.9rem;color:#61736c;font-family:var(--font-serif,Georgia,serif)}
+.migrant-card-copy>p:not(.eyebrow){font-size:.84rem;line-height:1.65;color:#53645e}
+.migrant-card-copy>a{display:inline-block;margin-top:.45rem;color:#244d40;font-size:.66rem;font-weight:800;letter-spacing:.09em;text-decoration:underline;text-underline-offset:4px}
+.migrant-text-card{min-height:260px;display:flex;align-items:stretch;border-top:3px solid #c5a15e}
+.migrant-text-card .migrant-card-copy{display:flex;flex-direction:column;align-items:flex-start}
+.migrant-text-card .migrant-card-copy>a{margin-top:auto;padding-top:1.2rem}
+.migrant-method-note{margin:1.5rem 0 0;color:#68766f;font-size:.72rem;line-height:1.6}
+@media(max-width:900px){.migrant-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.migrant-card>img{height:200px}}
+@media(max-width:600px){.migration-species-link{display:block;margin:1rem 0 0}.migrant-facts{grid-template-columns:1fr;gap:.8rem}.migrant-cards{grid-template-columns:1fr}.migrant-card>img{height:230px}.migrant-text-card{min-height:0}.migrant-text-card .migrant-card-copy>a{margin-top:1rem}}
+@media(prefers-reduced-motion:reduce){.migrant-card{transition:none}.migrant-card:hover{transform:none}}
