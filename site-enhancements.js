@@ -67,5 +67,49 @@
   const themeTrack=()=>{if(mode==='website'&&trackSelect){trackSelect.value=Object.prototype.hasOwnProperty.call(websiteTracks,body.dataset.theme)?body.dataset.theme:'forest';playWebsiteTrack(trackSelect.value);}};
   new MutationObserver(themeTrack).observe(body,{attributes:true,attributeFilter:['data-theme']});
   window.addEventListener('pagehide',()=>{audio?.pause();clearUrls();},{once:true});
+  // Cinematic first-entry sequence, shown after the device chooser.
+  const showEntryScene=()=>{
+    if(document.querySelector('.cinematic-entry')) return;
+    const scene=document.createElement('section');
+    scene.className='cinematic-entry';
+    scene.setAttribute('role','dialog');
+    scene.setAttribute('aria-modal','true');
+    scene.setAttribute('aria-labelledby','entryTitle');
+    scene.innerHTML=`
+      <div class="entry-landscape" aria-hidden="true"></div>
+      <div class="entry-grain" aria-hidden="true"></div>
+      <div class="entry-sun" aria-hidden="true"></div>
+      <div class="entry-flock entry-flock-one" aria-hidden="true">
+        <svg viewBox="0 0 700 190"><g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 82q24-28 48 0 24-28 48 0"/><path d="M175 48q20-24 40 0 20-24 40 0"/><path d="M310 112q17-20 34 0 17-20 34 0"/><path d="M455 58q22-26 44 0 22-26 44 0"/><path d="M590 128q16-19 32 0 16-19 32 0"/></g></svg>
+      </div>
+      <div class="entry-flock entry-flock-two" aria-hidden="true">
+        <svg viewBox="0 0 620 160"><g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"><path d="M20 75q18-21 36 0 18-21 36 0"/><path d="M140 30q15-18 30 0 15-18 30 0"/><path d="M270 100q19-23 38 0 19-23 38 0"/><path d="M420 48q17-20 34 0 17-20 34 0"/><path d="M535 115q15-18 30 0 15-18 30 0"/></g></svg>
+      </div>
+      <div class="entry-content">
+        <p class="entry-kicker"><span></span> A FIELD GUIDE TO THE WILD NORTH OF KERALA</p>
+        <h1 id="entryTitle">WINGS OF<br><em>KASARAGOD.</em></h1>
+        <p class="entry-subtitle">Where the backwaters breathe,<br>and the sky comes alive.</p>
+        <div class="entry-rule"><span></span><span>KERALA · INDIA</span><span></span></div>
+        <button class="entry-enter" type="button"><span>ENTER THE JOURNEY</span><b aria-hidden="true">↗</b></button>
+        <button class="entry-skip" type="button">SKIP INTRO</button>
+        <p class="entry-credit">A living field guide · created by Shijin</p>
+      </div>
+      <div class="entry-bottomline" aria-hidden="true"><span>12° 23′ N</span><i></i><span>THE MALABAR COAST</span><i></i><span>01 / 06</span></div>
+    `;
+    document.body.append(scene);
+    document.body.classList.add('entry-scene-active');
+    const finish=()=>{
+      if(!scene.isConnected) return;
+      scene.classList.add('entry-leaving');
+      window.setTimeout(()=>{scene.remove();document.body.classList.remove('entry-scene-active');document.querySelector('#home')?.setAttribute('tabindex','-1');},850);
+    };
+    scene.querySelector('.entry-enter').addEventListener('click',finish);
+    scene.querySelector('.entry-skip').addEventListener('click',finish);
+    scene.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();finish();}});
+    scene.querySelector('.entry-enter').focus({preventScroll:true});
+  };
+  if(deviceDialog?.open) deviceDialog.addEventListener('close',showEntryScene,{once:true});
+  else showEntryScene();
+
   setMusicMode('website');
 })();
